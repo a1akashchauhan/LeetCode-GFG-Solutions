@@ -6,7 +6,7 @@ public:
         int i=1;
         while(i<=n){
             int bitcount= (1+ int(log2(i)));
-            ans= ((ans<<(bitcount))%mod+i)%mod;
+            ans= ((ans<<(bitcount))+i)%mod;
             i++;
         }
         return ans;
