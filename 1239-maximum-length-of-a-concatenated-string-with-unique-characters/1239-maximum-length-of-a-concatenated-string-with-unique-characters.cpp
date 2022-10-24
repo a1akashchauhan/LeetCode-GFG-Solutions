@@ -1,26 +1,32 @@
 class Solution {
 public:
-    int maxUniqueChar(string s) {  
-        int count[26] = {0};
-        for(int i = 0; i < s.size(); i++)
-            if(count[s[i] - 'a']++ > 0) return 0;
-        return s.size();
-    }
-    
-    void solve(vector<string> &arr, int index, string curr, int &ans) {
-        if(index == arr.size()) {            
-            if(maxUniqueChar(curr) > ans) {
-            ans = curr.size();
+    int maxLength(vector<string> &arr) {
+        vector<int> nums;
+        for(string &i: arr) {
+            int num = 0;
+            bool flag = true;
+            
+            for(char &j: i) {
+                int x = 1 << (j - 'a');
+                
+                if(num & x)
+                    flag = false;
+                num |= x;
             }
-            return;
+            
+            if(flag)
+                nums.push_back(num);
         }
-        solve(arr, index+1, curr, ans); 
-        solve(arr, index+1, curr+arr[index], ans);
+        
+        return solve(nums, 0, 0);
     }
     
-    int maxLength(vector<string>& arr) {
-        int ans = 0;
-        solve(arr, 0, "", ans);
-        return ans;
+private:
+    int solve(vector<int> &nums, int k,  int i) {
+        int res = __builtin_popcount(k);
+        for(int j = i; j < nums.size(); j++)
+            if((k & nums[j]) == 0)
+                res = max(res, solve(nums, k | nums[j], j + 1));
+        return res;
     }
 };
