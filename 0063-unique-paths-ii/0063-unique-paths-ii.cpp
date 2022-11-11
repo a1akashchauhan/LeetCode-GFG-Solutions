@@ -28,19 +28,29 @@ public:
         int n= obstacleGrid[0].size();
         
         vector<vector<int>>v(m, vector<int>(n,-1));
-        return fun(n-1,m-1,obstacleGrid,v);
+        // return fun(n-1,m-1,obstacleGrid,v);
+        vector<vector<int>>t(m+1, vector<int>(n+1,0));
+        // t[0][0]=1;
         
-        
-        // for(int i=1;i<m;i++){
-        //     for(int j=1; j<n; j++){
-        //         if(obstacleGrid[i][j]==1){
-        //             v[i][j]=0;
-        //             break;
-        //         }
-        //         v[i][j]= v[i-1][j]+ v[i][j-1];
-        //     }
-        // }
-        // return v[m-1][n-1];
+        for(int i=0;i<m;i++){
+            for(int j=0; j<n; j++){
+                if(obstacleGrid[i][j]==1){
+                    t[i][j]=0;
+                    // break;
+                }
+                else if(i==0 and j==0){
+                    t[i][j]=1;
+                }
+                else{
+                    int up=0, down=0;
+                    if(i>0) up = t[i-1][j];
+                    if(j>0) down= t[i][j-1];
+                    t[i][j]= up+down;
+                }
+                
+            }
+        }
+        return t[m-1][n-1];
         
     }
 };
