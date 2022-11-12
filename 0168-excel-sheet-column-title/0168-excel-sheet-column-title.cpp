@@ -4,6 +4,9 @@ public:
         string al= "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         int n= columnNumber;
         string ans="";
+        if(n==1){
+            return "A";
+        }
         while(n>0){
             n=n-1;
             int k= n%26;
