@@ -1,18 +1,18 @@
 class Solution {
 public:
     int numSquares(int n) {
-        //vector for updating the dp array/values
-        vector<int> dp(n+1,INT_MAX);
-        //base case
-        dp[0]=0;
-        int count = 1;
-        while(count*count <= n) {
-        int sq = count*count;
-        for(int i = sq; i < n+1; i++) {
-            dp[i] = min(dp[i-sq] + 1,dp[i]);
+        vector<int> dp(n+1);
+        dp[0] = 0;
+        dp[1]=1;
+        for(int i=2; i<=n;i++){
+            int mn= INT_MAX;
+            for(int j=1; j*j<=i;j++){
+                int rem= i- j*j;
+                mn=min(mn,dp[rem]);  
+            }
+            dp[i]=mn+1;
         }
-        count++;
-    }
-    return dp[n];
+        return dp[n];
+        
     }
 };
