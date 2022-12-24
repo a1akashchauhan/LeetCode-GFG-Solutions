@@ -18,7 +18,21 @@ public:
         int n= text1.size();
         int m= text2.size();
         vector<vector<int>>dp(1001,vector<int>(1001,-1));
-        return fun(n,m,text1, text2,dp);
-        
+        int k= fun(n,m,text1, text2,dp);
+        string ans;
+        // int index=k-1;
+        int i,j=0;
+        while(i>0 and j>0){
+            if(text1[i-1]==text2[j-1]){
+                ans+=text1[i-1];
+            }
+            else if(dp[i-1][j]>dp[i][j-1]){
+                i--;
+            }
+            else{
+                j--;
+            }
+        }
+        return k;
     }
 };
