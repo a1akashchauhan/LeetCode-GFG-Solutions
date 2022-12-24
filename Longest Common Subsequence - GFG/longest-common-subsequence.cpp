@@ -11,7 +11,7 @@ class Solution
     public:
     //Function to find the length of longest common subsequence in two strings.
     
-    int fun(int x, int y, string a, string b, vector<vector<int>>& dp){
+    int fun(int x, int y, string &a, string &b, vector<vector<int>>& dp){
         if(x<0 or y<0){
             // if(a[x]==b[y]){
             //     return 1;
