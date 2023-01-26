@@ -1,19 +1,28 @@
 class Solution {
 public:
-    int findMaxProfit(vector<int>&prices,bool f,int day,vector<vector<int>>&dp){
-        if(day>=prices.size())return 0;
-        if(dp[f][day]!=-1)return dp[f][day];
-        if(!f){
-            int x = findMaxProfit(prices,!f,day+1,dp) - prices[day];
-            int y = findMaxProfit(prices,f,day+1,dp);
-            return dp[f][day] = max(x,y);
+    int fun(int i, int j, int n, vector<int>&prices, vector<vector<int>>&dp){
+        if(i>=n){
+            return 0;
         }
-			int x  = prices[day] + findMaxProfit(prices,!f,day+2,dp);
-			int y  = findMaxProfit(prices,f,day+1,dp);
-        return dp[f][day] = max(x,y); 
+        if(dp[i][j]!=-1){
+            return dp[i][j];
+        }
+        
+        if(j){  // j=1 -> buy
+            return dp[i][j] = max(-prices[i]+fun(i+1, 0, n, prices, dp), fun(i+1, 1, n, prices, dp));
+        }
+        
+            return dp[i][j] = max(prices[i]+ fun(i+2,1,n,prices, dp), fun(i+1,0, n, prices, dp));
+        
+        
+        
     }
+    
+    
     int maxProfit(vector<int>& prices) {
-        vector<vector<int>>dp(2,vector<int>(prices.size(),-1));
-        return findMaxProfit(prices,false,0,dp);
+        int n=prices.size();
+        vector<vector<int>>dp(n+1,vector<int>(2,-1));
+        
+        return fun(0,1,n,prices,dp);
     }
 };
