@@ -5,8 +5,7 @@ public:
         if(n==0){
             return 0;
         }
-        else if(n==1 or n==2){
-            
+        else if(n==1 or n==2){  
             return 1;
         }
         int a=0,b=1,c=1;
