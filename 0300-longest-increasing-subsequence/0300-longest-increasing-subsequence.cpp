@@ -7,11 +7,12 @@ public:
         if(dp[i][k+1]!=-1){
             return dp[i][k+1];
         }
-        int len= fun(i+1, k, n, nums, dp);
         
+        int len=-1;
         if(k==-1 or nums[k]<nums[i]){
-            len= max(len, 1+fun(i+1, i, n, nums, dp));
+            len=( 1+fun(i+1, i, n, nums, dp));
         }
+        len=  max(len, fun(i+1, k, n, nums, dp));
         return dp[i][k+1]=len;
     }
     
