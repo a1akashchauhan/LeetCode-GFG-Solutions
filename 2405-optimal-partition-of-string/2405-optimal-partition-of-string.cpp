@@ -13,8 +13,7 @@ public:
                 ans++;
                 mp.clear();
                 mp[c]++;
-            }
-                
+            }     
         }
         return ans;
     }
