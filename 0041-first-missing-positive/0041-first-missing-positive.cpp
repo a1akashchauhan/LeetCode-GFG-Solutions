@@ -8,7 +8,7 @@ public:
             }
         }   
         for(int i=0; i<n; i++){
-            if(abs(v[i])<=n and abs(v[i])>0){
+            if(abs(v[i])<=n){
                 v[abs(v[i])-1]= - abs(v[abs(v[i])-1]);
             }
         }
